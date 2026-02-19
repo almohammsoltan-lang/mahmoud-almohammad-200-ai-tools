@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium AI Tools Directory</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Almarai:wght@400;700;800&family=Poppins:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            background: #0B0F19;
+            color: #E0E6FF;
+            line-height: 1.6;
+            transition: background 0.3s ease;
+        }
+
+        body[lang="ar"] {
+            font-family: 'Cairo', 'Almarai', sans-serif;
+            direction: rtl;
+        }
+
+        body.light-mode {
+            background: #F8F9FC;
+            color: #1A1F3A;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            backdrop-filter: blur(10px);
+            background: rgba(11, 15, 25, 0.8);
+            border-bottom: 1px solid rgba(100, 150, 255, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        body.light-mode header {
+            background: rgba(248, 249, 252, 0.8);
+            border-bottom: 1px solid rgba(100, 150, 255, 0.15);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6496FF, #A78BFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .controls {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .toggle-btn {
+            background: rgba(100, 150, 255, 0.1);
+            border: 1px solid rgba(100, 150, 255, 0.3);
+            color: #6496FF;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(100, 150, 255, 0.2);
+            border-color: rgba(100, 150, 255, 0.6);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #6496FF, #A78BFF, #FF6BA6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body.light-mode .hero h1 {
+            background: linear-gradient(135deg, #3B5BDB, #7C3AED, #DB2777);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #A0A8C8;
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body.light-mode .hero p {
+            color: #6B7280;
+        }
+
+        body[lang="ar"] .hero h1 {
+            font-family: 'Cairo', sans-serif;
+            font-size: 3rem;
+        }
+
+        body[lang="ar"] .hero p {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .category-card {
+            background: rgba(50, 70, 120, 0.1);
+            border: 1px solid rgba(100, 150, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(100, 150, 255, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .category-card:hover {
+            background: rgba(100, 150, 255, 0.15);
+            border-color: rgba(100, 150, 255, 0.6);
+            transform: translateY(-8px);
+            box-shadow: 0 0 30px rgba(100, 150, 255, 0.3);
+        }
+
+        .category-card:hover::before {
+            opacity: 1;
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #6496FF;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body[lang="ar"] .category-card h3 {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .category-card p {
+            font-size: 0.95rem;
+            color: #A0A8C8;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body[lang="ar"] .category-card p {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body.light-mode .category-card {
+            background: rgba(100, 150, 255, 0.05);
+            border-color: rgba(100, 150, 255, 0.3);
+        }
+
+        body.light-mode .category-card:hover {
+            background: rgba(100, 150, 255, 0.12);
+            border-color: rgba(100, 150, 255, 0.7);
+        }
+
+        body.light-mode .category-card h3 {
+            color: #3B5BDB;
+        }
+
+        body.light-mode .category-card p {
+            color: #6B7280;
+        }
+
+        .tools-view {
+            display: none;
+            padding: 4rem 0;
+        }
+
+        .tools-view.active {
+            display: block;
+        }
+
+        .back-btn {
+            background: rgba(100, 150, 255, 0.1);
+            border: 1px solid rgba(100, 150, 255, 0.3);
+            color: #6496FF;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .back-btn:hover {
+            background: rgba(100, 150, 255, 0.2);
+            border-color: rgba(100, 150, 255, 0.6);
+        }
+
+        .tools-header {
+            margin-bottom: 3rem;
+        }
+
+        .tools-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #6496FF, #A78BFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body[lang="ar"] .tools-header h2 {
+            font-family: 'Cairo', sans-serif;
+            font-size: 2rem;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .tool-card {
+            background: rgba(50, 70, 120, 0.1);
+            border: 1px solid rgba(100, 150, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .tool-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(100, 150, 255, 0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tool-card:hover {
+            background: rgba(100, 150, 255, 0.2);
+            border-color: rgba(164, 139, 255, 0.8);
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 0 40px rgba(100, 150, 255, 0.4), inset 0 0 20px rgba(100, 150, 255, 0.1);
+        }
+
+        .tool-card:hover::after {
+            opacity: 1;
+        }
+
+        .tool-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #6496FF;
+            position: relative;
+            z-index: 1;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body[lang="ar"] .tool-name {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .tool-desc {
+            font-size: 0.95rem;
+            color: #A0A8C8;
+            flex-grow: 1;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body[lang="ar"] .tool-desc {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .tool-cta {
+            font-size: 0.85rem;
+            color: #A78BFF;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .tool-card:hover .tool-cta {
+            opacity: 1;
+        }
+
+        body.light-mode .tool-card {
+            background: rgba(100, 150, 255, 0.05);
+            border-color: rgba(100, 150, 255, 0.3);
+        }
+
+        body.light-mode .tool-card:hover {
+            background: rgba(100, 150, 255, 0.15);
+            border-color: rgba(124, 58, 237, 0.8);
+            box-shadow: 0 0 40px rgba(100, 150, 255, 0.3), inset 0 0 20px rgba(100, 150, 255, 0.08);
+        }
+
+        body.light-mode .tool-name {
+            color: #3B5BDB;
+        }
+
+        body.light-mode .tool-desc {
+            color: #6B7280;
+        }
+
+        body.light-mode .tool-cta {
+            color: #7C3AED;
+        }
+
+        footer {
+            margin-top: 6rem;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            overflow: hidden;
+            animation: slideInFooter 0.5s ease-out;
+        }
+
+        @keyframes slideInFooter {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #6496FF, #A78BFF, transparent);
+            opacity: 0.5;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, rgba(100, 150, 255, 0.1), rgba(167, 139, 255, 0.08));
+            border: 1px solid rgba(100, 150, 255, 0.2);
+            border-radius: 15px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 8px 32px rgba(100, 150, 255, 0.15);
+        }
+
+        body.light-mode .footer-content {
+            background: linear-gradient(135deg, rgba(100, 150, 255, 0.08), rgba(167, 139, 255, 0.05));
+            border-color: rgba(100, 150, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(100, 150, 255, 0.1);
+        }
+
+        #footer-text {
+            font-size: 1rem;
+            font-weight: 500;
+            background: linear-gradient(135deg, #6496FF, #A78BFF, #FF6BA6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+        }
+
+        body.light-mode #footer-text {
+            background: linear-gradient(135deg, #3B5BDB, #7C3AED, #DB2777);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .main-content {
+            padding-bottom: 280px;
+        }
+
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero {
+                padding: 6rem 2rem 3rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .main-content {
+                padding-bottom: 320px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .controls {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .toggle-btn {
+                padding: 0.45rem 0.9rem;
+                font-size: 0.85rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .hero {
+                padding: 5rem 1.5rem 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                margin-bottom: 0.8rem;
+            }
+
+            body[lang="ar"] .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+                max-width: 100%;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .category-card {
+                padding: 1.5rem;
+            }
+
+            .category-icon {
+                font-size: 2rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .category-card h3 {
+                font-size: 1.2rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .category-card p {
+                font-size: 0.85rem;
+            }
+
+            .tools-view {
+                padding: 2rem 0;
+            }
+
+            .back-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .tools-header {
+                margin-bottom: 1.5rem;
+            }
+
+            .tools-header h2 {
+                font-size: 1.6rem;
+            }
+
+            body[lang="ar"] .tools-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .tool-card {
+                padding: 1.2rem;
+            }
+
+            .tool-name {
+                font-size: 1.05rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .tool-desc {
+                font-size: 0.85rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .tool-cta {
+                font-size: 0.75rem;
+            }
+
+            .tool-card:hover {
+                transform: scale(1.02) translateY(-3px);
+            }
+
+            .footer-content {
+                padding: 1.8rem;
+                border-radius: 12px;
+                margin: 0 1rem;
+            }
+
+            #footer-text {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+
+            footer {
+                margin-top: 3rem;
+                padding: 2rem 1rem;
+            }
+
+            .main-content {
+                padding-bottom: 340px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 0.8rem 1rem;
+            }
+
+            .logo {
+                font-size: 1rem;
+            }
+
+            .toggle-btn {
+                padding: 0.4rem 0.7rem;
+                font-size: 0.75rem;
+            }
+
+            .controls {
+                gap: 0.8rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 4rem 1rem 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+                margin-bottom: 0.6rem;
+            }
+
+            body[lang="ar"] .hero h1 {
+                font-size: 1.4rem;
+            }
+
+            .hero p {
+                font-size: 0.85rem;
+            }
+
+            .categories-grid {
+                gap: 0.8rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .category-card {
+                padding: 1.2rem;
+            }
+
+            .category-icon {
+                font-size: 1.8rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .category-card h3 {
+                font-size: 1rem;
+            }
+
+            .category-card p {
+                font-size: 0.75rem;
+            }
+
+            .back-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .tools-header h2 {
+                font-size: 1.3rem;
+            }
+
+            body[lang="ar"] .tools-header h2 {
+                font-size: 1.2rem;
+            }
+
+            .tools-grid {
+                gap: 0.8rem;
+            }
+
+            .tool-card {
+                padding: 1rem;
+            }
+
+            .tool-name {
+                font-size: 0.95rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .tool-desc {
+                font-size: 0.8rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .footer-content {
+                padding: 1.5rem;
+                margin: 0 0.5rem;
+                border-radius: 10px;
+            }
+
+            #footer-text {
+                font-size: 0.8rem;
+                line-height: 1.5;
+            }
+
+            footer {
+                margin-top: 2.5rem;
+                padding: 1.5rem 0.5rem;
+            }
+
+            .main-content {
+                padding-bottom: 380px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+
+            body[lang="ar"] .hero h1 {
+                font-size: 1.2rem;
+            }
+
+            .hero p {
+                font-size: 0.8rem;
+            }
+
+            #footer-text {
+                font-size: 0.75rem;
+            }
+
+            .main-content {
+                padding-bottom: 400px;
+            }
+        }
+    </style>
+</head>
+<body lang="en">
+    <header>
+        <div class="logo" onclick="backToCategories()">AI Tools</div>
+        <div class="controls">
+            <button class="toggle-btn" onclick="toggleTheme()" id="theme-toggle">🌙 Dark</button>
+            <button class="toggle-btn" onclick="toggleLanguage()" id="lang-toggle">EN</button>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="container">
+            <div id="categories-view">
+                <div class="hero">
+                    <h1 id="hero-title">Discover Premium AI Tools</h1>
+                    <p id="hero-desc">Access cutting-edge artificial intelligence solutions for every need</p>
+                </div>
+                <div class="categories-grid" id="categories-grid"></div>
+            </div>
+
+            <div id="tools-view" class="tools-view">
+                <button class="back-btn" onclick="backToCategories()" id="back-btn">← Back to Categories</button>
+                <div class="tools-header">
+                    <h2 id="tools-title"></h2>
+                </div>
+                <div class="tools-grid" id="tools-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p id="footer-text">تم جمع 200 اداة ذكاء اصطناعي بواسطة المصمم والمبرمج محمود المحمد لتسهيل عملك</p>
+        </div>
+    </footer>
+
+    <script>
+        const categories = {
+            writing: {
+                name_en: 'Writing',
+                name_ar: 'الكتابة',
+                icon: '✍️',
+                desc_en: 'AI-powered writing assistants and content generation tools',
+                desc_ar: 'مساعدو الكتابة بقوة الذكاء الاصطناعي وأدوات توليد المحتوى',
+                tools: [
+                    { name_en: 'ChatGPT', name_ar: 'تشات جي بي تي', desc_en: 'Advanced conversational AI for creative writing', desc_ar: 'ذكاء اصطناعي محادثي متقدم للكتابة الإبداعية', link: 'https://openai.com/chatgpt' },
+                    { name_en: 'Claude', name_ar: 'كلود', desc_en: 'Intelligent AI assistant for content creation', desc_ar: 'مساعد ذكاء اصطناعي ذكي لإنشاء المحتوى', link: 'https://claude.ai' },
+                    { name_en: 'Jasper', name_ar: 'جاسبر', desc_en: 'AI copywriting platform for marketing content', desc_ar: 'منصة كتابة إعلانية بالذكاء الاصطناعي', link: 'https://jasper.ai' },
+                    { name_en: 'Copy.ai', name_ar: 'كوبي أي', desc_en: 'Quick AI content generation for businesses', desc_ar: 'توليد محتوى سريع بالذكاء الاصطناعي للشركات', link: 'https://copy.ai' },
+                    { name_en: 'Writesonic', name_ar: 'رايتسونك', desc_en: 'AI writing assistant for blogs and ads', desc_ar: 'مساعد كتابة ذكاء اصطناعي للمدونات والإعلانات', link: 'https://writesonic.com' },
+                    { name_en: 'Sudowrite', name_ar: 'سودوراتي', desc_en: 'AI-powered creative writing tool', desc_ar: 'أداة الكتابة الإبداعية المدعومة بالذكاء الاصطناعي', link: 'https://sudowrite.com' },
+                    { name_en: 'Rytr', name_ar: 'رايتر', desc_en: 'Affordable AI writing assistant', desc_ar: 'مساعد كتابة ذكاء اصطناعي بأسعار معقولة', link: 'https://rytr.me' },
+                    { name_en: 'Grammarly', name_ar: 'جراماري', desc_en: 'AI grammar and writing improvement', desc_ar: 'تحسين القواعس النحوية والكتابة بالذكاء الاصطناعي', link: 'https://grammarly.com' },
+                    { name_en: 'Hemingway Editor', name_ar: 'محرر هيمنجواي', desc_en: 'Simplify and improve your writing style', desc_ar: 'تبسيط وتحسين أسلوب كتابتك', link: 'https://hemingwayapp.com' },
+                    { name_en: 'Quill', name_ar: 'كويل', desc_en: 'AI-powered article writing platform', desc_ar: 'منصة كتابة المقالات بقوة الذكاء الاصطناعي', link: 'https://getquill.io' },
+                    { name_en: 'Wordtune', name_ar: 'وردتيون', desc_en: 'Rewrite sentences with AI suggestions', desc_ar: 'إعادة صياغة الجمل باقتراحات الذكاء الاصطناعي', link: 'https://wordtune.com' },
+                    { name_en: 'Articoolo', name_ar: 'أرتيكولو', desc_en: 'Automated article generation tool', desc_ar: 'أداة توليد المقالات الآلية', link: 'https://articoolo.com' },
+                    { name_en: 'Lex', name_ar: 'ليكس', desc_en: 'AI-enhanced document editor', desc_ar: 'محرر مستندات محسّن بالذكاء الاصطناعي', link: 'https://lex.page' },
+                    { name_en: 'HyperWrite', name_ar: 'هايبر رايت', desc_en: 'AI autocomplete for faster writing', desc_ar: 'إكمال تلقائي بالذكاء الاصطناعي للكتابة الأسرع', link: 'https://hyperwrite.ai' },
+                    { name_en: 'QuillBot', name_ar: 'كويل بوت', desc_en: 'Paraphrase and improve text quality', desc_ar: 'إعادة صياغة وتحسين جودة النص', link: 'https://quillbot.com' },
+                    { name_en: 'Anyword', name_ar: 'اني وورد', desc_en: 'AI copywriting for marketing teams', desc_ar: 'كتابة إعلانية بالذكاء الاصطناعي لفرق التسويق', link: 'https://anyword.com' },
+                    { name_en: 'INK', name_ar: 'إينك', desc_en: 'SEO-optimized AI writing platform', desc_ar: 'منصة كتابة ذكاء اصطناعي محسّنة لـ SEO', link: 'https://inkforall.com' },
+                    { name_en: 'Coppice', name_ar: 'كوبيس', desc_en: 'Collaborative AI writing environment', desc_ar: 'بيئة كتابة تعاونية بالذكاء الاصطناعي', link: 'https://coppice.ai' },
+                    { name_en: 'Neural Writer', name_ar: 'نيورال رايتر', desc_en: 'Neural network-powered content creation', desc_ar: 'إنشاء محتوى مدعوم بشبكات عصبية', link: 'https://neuralwriter.com' },
+                    { name_en: 'Compose', name_ar: 'كومبوز', desc_en: 'AI writing assistant for emails', desc_ar: 'مساعد كتابة ذكاء اصطناعي للبريد الإلكتروني', link: 'https://compose.ai' },
+                    { name_en: 'Story Dragon', name_ar: 'ستوري دراجون', desc_en: 'Creative story writing with AI', desc_ar: 'كتابة القصص الإبداعية مع الذكاء الاصطناعي', link: 'https://storydragon.ai' },
+                    { name_en: 'Narrato', name_ar: 'ناراتو', desc_en: 'AI content generator for marketing', desc_ar: 'مولد محتوى ذكاء اصطناعي للتسويق', link: 'https://narrato.io' },
+                    { name_en: 'Copysmith', name_ar: 'كوبيسميث', desc_en: 'Product description AI writer', desc_ar: 'كاتب وصف المنتج بالذكاء الاصطناعي', link: 'https://copysmith.ai' },
+                    { name_en: 'Article Forge', name_ar: 'أرتيكل فورج', desc_en: 'Automated high-quality article creation', desc_ar: 'إنشاء مقالات عالية الجودة آلياً', link: 'https://www.articleforge.com' },
+                    { name_en: 'Smodin', name_ar: 'سمودين', desc_en: 'AI essay writer and content generator', desc_ar: 'كاتب المقالات ومولد المحتوى بالذكاء الاصطناعي', link: 'https://smodin.io' },
+                    { name_en: 'Content Studio', name_ar: 'كونتينت ستوديو', desc_en: 'AI-powered content creation suite', desc_ar: 'مجموعة إنشاء محتوى مدعومة بالذكاء الاصطناعي', link: 'https://contentstudio.io' },
+                    { name_en: 'Bertha AI', name_ar: 'بيرثا أي', desc_en: 'WordPress AI writing plugin', desc_ar: 'إضافة كتابة ذكاء اصطناعي لـ WordPress', link: 'https://bertha.ai' },
+                    { name_en: 'Simplified', name_ar: 'سيمبليفايد', desc_en: 'AI design and writing platform', desc_ar: 'منصة التصميم والكتابة بالذكاء الاصطناعي', link: 'https://simplified.com' },
+                    { name_en: 'Assistive Writing', name_ar: 'أسيستيف رايتنج', desc_en: 'Accessibility-focused AI writing', desc_ar: 'كتابة ذكاء اصطناعي مركزة على إمكانية الوصول', link: 'https://assistivewriting.com' },
+                    { name_en: 'Wordsmith', name_ar: 'ورد سميث', desc_en: 'Narrative AI for business reports', desc_ar: 'ذكاء اصطناعي حكائي لتقارير الأعمال', link: 'https://wordsmith.ai' },
+                    { name_en: 'Typeform AI', name_ar: 'تايب فورم أي', desc_en: 'AI-enhanced survey and form creation', desc_ar: 'إنشاء الاستطلاعات والنماذج المحسّنة بالذكاء الاصطناعي', link: 'https://typeform.com' },
+                    { name_en: 'Content Strategist', name_ar: 'محلل المحتوى', desc_en: 'AI content planning and strategy tool', desc_ar: 'أداة التخطيط والإستراتيجية المحتوى بالذكاء الاصطناعي', link: 'https://contentstrategy.ai' },
+                    { name_en: 'AI Scribe', name_ar: 'إيه آي سكرايب', desc_en: 'Real-time writing assistance', desc_ar: 'مساعدة الكتابة في الوقت الفعلي', link: 'https://aiscribe.ai' },
+                    { name_en: 'Scribd AI', name_ar: 'سكريبد أي', desc_en: 'Document writing and sharing AI', desc_ar: 'ذكاء اصطناعي لكتابة ومشاركة المستندات', link: 'https://www.scribd.com' },
+                ]
+            },
+            video: {
+                name_en: 'Video',
+                name_ar: 'الفيديو',
+                icon: '🎬',
+                desc_en: 'Video generation and editing powered by AI',
+                desc_ar: 'توليد وتحرير الفيديو بقوة الذكاء الاصطناعي',
+                tools: [
+                    { name_en: 'Runway ML', name_ar: 'رانواي', desc_en: 'AI-powered video editing platform', desc_ar: 'منصة تحرير فيديو مدعومة بالذكاء الاصطناعي', link: 'https://runway.com' },
+                    { name_en: 'Synthesia', name_ar: 'سينثيسيا', desc_en: 'Create AI-generated videos with avatars', desc_ar: 'إنشاء مقاطع فيديو مولدة بذكاء اصطناعي مع صور رمزية', link: 'https://synthesia.io' },
+                    { name_en: 'Descript', name_ar: 'ديسكريبت', desc_en: 'Video editor for content creators', desc_ar: 'محرر الفيديو لمنشئي المحتوى', link: 'https://descript.com' },
+                    { name_en: 'Pictory', name_ar: 'بكتوري', desc_en: 'Turn text into engaging videos', desc_ar: 'تحويل النصوص إلى مقاطع فيديو جذابة', link: 'https://pictory.ai' },
+                    { name_en: 'Genmo', name_ar: 'جينمو', desc_en: 'Generate videos from text prompts', desc_ar: 'توليد مقاطع فيديو من موجهات نصية', link: 'https://genmo.ai' },
+                    { name_en: 'Pika', name_ar: 'بيكا', desc_en: 'Animated video generation AI', desc_ar: 'ذكاء اصطناعي لتوليد الفيديو المتحرك', link: 'https://pika.art' },
+                    { name_en: 'Fliki', name_ar: 'فليكي', desc_en: 'Video creation from text with AI voices', desc_ar: 'إنشاء الفيديو من النصوص مع أصوات ذكاء اصطناعي', link: 'https://fliki.ai' },
+                    { name_en: 'InVideo', name_ar: 'إن فيديو', desc_en: 'AI video creator for marketing', desc_ar: 'منشئ فيديو ذكاء اصطناعي للتسويق', link: 'https://invideo.io' },
+                    { name_en: 'Loom', name_ar: 'لوم', desc_en: 'Screen recording with AI highlights', desc_ar: 'تسجيل الشاشة مع أبرز نقاط الذكاء الاصطناعي', link: 'https://loom.com' },
+                    { name_en: 'Opus Clip', name_ar: 'أوبوس كليب', desc_en: 'AI video clipping and repurposing', desc_ar: 'قطع وإعادة تطبيق الفيديو بالذكاء الاصطناعي', link: 'https://opusclip.com' },
+                    { name_en: 'Gamma', name_ar: 'جاما', desc_en: 'Presentation to video converter', desc_ar: 'محول العروض التقديمية إلى فيديو', link: 'https://gamma.app' },
+                    { name_en: 'Wave.video', name_ar: 'ويف فيديو', desc_en: 'Cloud-based video editor with AI', desc_ar: 'محرر فيديو قائم على السحابة مع الذكاء الاصطناعي', link: 'https://wave.video' },
+                    { name_en: 'Topaz Video AI', name_ar: 'توباز فيديو', desc_en: 'Video upscaling and enhancement', desc_ar: 'ترقية وتحسين الفيديو', link: 'https://www.topazlabs.com' },
+                    { name_en: 'Adobe Firefly', name_ar: 'أدوبي فايرفلاي', desc_en: 'Generative AI for video creation', desc_ar: 'ذكاء اصطناعي توليدي لإنشاء الفيديو', link: 'https://firefly.adobe.com' },
+                    { name_en: 'Movavi', name_ar: 'موفافي', desc_en: 'Easy video editing with AI features', desc_ar: 'تحرير الفيديو السهل مع ميزات الذكاء الاصطناعي', link: 'https://movavi.com' },
+                    { name_en: 'CapCut', name_ar: 'كاب كات', desc_en: 'Mobile video editor with AI tools', desc_ar: 'محرر فيديو محمول مع أدوات الذكاء الاصطناعي', link: 'https://www.capcut.com' },
+                    { name_en: 'Vimeo AI', name_ar: 'فيميو أي', desc_en: 'Video hosting with AI capabilities', desc_ar: 'استضافة الفيديو مع إمكانيات الذكاء الاصطناعي', link: 'https://vimeo.com' },
+                    { name_en: 'VEED.IO', name_ar: 'فيد', desc_en: 'Online video editor with AI subtitles', desc_ar: 'محرر الفيديو عبر الإنترنت مع الترجمات بالذكاء الاصطناعي', link: 'https://www.veed.io' },
+                    { name_en: 'Animaker', name_ar: 'أنيميكر', desc_en: 'AI-powered animation video maker', desc_ar: 'صانع فيديو الرسوم المتحركة بالذكاء الاصطناعي', link: 'https://www.animaker.com' },
+                    { name_en: 'Powtoon', name_ar: 'باوتون', desc_en: 'Video presentation maker with AI', desc_ar: 'صانع العروض التقديمية بالفيديو مع الذكاء الاصطناعي', link: 'https://www.powtoon.com' },
+                    { name_en: 'Animoto', name_ar: 'أنيموتو', desc_en: 'Create videos from photos and music', desc_ar: 'إنشاء مقاطع فيديو من الصور والموسيقى', link: 'https://animoto.com' },
+                    { name_en: 'Clipmaker', name_ar: 'كليب ميكر', desc_en: 'AI video clips from longer content', desc_ar: 'مقاطع فيديو ذكاء اصطناعي من محتوى أطول', link: 'https://clipmaker.ai' },
+                    { name_en: 'HeyGen', name_ar: 'هايجين', desc_en: 'AI video generation with avatars', desc_ar: 'توليد فيديو ذكاء اصطناعي مع صور رمزية', link: 'https://www.heygen.com' },
+                    { name_en: 'Steve AI', name_ar: 'ستيف أي', desc_en: 'Instant video creation platform', desc_ar: 'منصة إنشاء الفيديو الفوري', link: 'https://www.steve.ai' },
+                    { name_en: 'Autocut', name_ar: 'أوتوكات', desc_en: 'Auto-edit video clips with AI', desc_ar: 'تحرير مقاطع الفيديو تلقائياً باستخدام الذكاء الاصطناعي', link: 'https://www.autocut.ai' },
+                    { name_en: 'Instantly', name_ar: 'إنستانتلي', desc_en: 'Video marketing automation tool', desc_ar: 'أداة أتمتة التسويق بالفيديو', link: 'https://instantly.ai' },
+                    { name_en: 'Twelve Labs', name_ar: 'توالف لابز', desc_en: 'AI video understanding platform', desc_ar: 'منصة فهم الفيديو بالذكاء الاصطناعي', link: 'https://twelvelabs.io' },
+                    { name_en: 'Coframe', name_ar: 'كوفريم', desc_en: 'Personalized video creation', desc_ar: 'إنشاء فيديو شخصي', link: 'https://coframe.io' },
+                    { name_en: 'Typeframes', name_ar: 'تايب فريمز', desc_en: 'Convert blog posts to videos', desc_ar: 'تحويل منشورات المدونة إلى مقاطع فيديو', link: 'https://typeframes.com' },
+                    { name_en: 'Synthesia Studio', name_ar: 'سينثيسيا ستوديو', desc_en: 'Professional video studio in cloud', desc_ar: 'استوديو فيديو احترافي في السحابة', link: 'https://synthesia.io' },
+                    { name_en: 'Deepbrain AI', name_ar: 'ديپ برين', desc_en: 'AI video generation platform', desc_ar: 'منصة توليد الفيديو بالذكاء الاصطناعي', link: 'https://www.deepbrain.io' },
+                    { name_en: 'Elai.io', name_ar: 'إيلاي', desc_en: 'Video creation from text', desc_ar: 'إنشاء الفيديو من النصوص', link: 'https://www.elai.io' },
+                    { name_en: 'VideoCreator', name_ar: 'فيديو كريتور', desc_en: 'AI-powered video creation', desc_ar: 'إنشاء الفيديو بقوة الذكاء الاصطناعي', link: 'https://videocreator.com' },
+                    { name_en: 'Repurpose.io', name_ar: 'ريپرپوز', desc_en: 'Multi-platform video distribution', desc_ar: 'توزيع الفيديو على منصات متعددة', link: 'https://repurpose.io' },
+                ]
+            },
+            image: {
+                name_en: 'Image Generation',
+                name_ar: 'توليد الصور',
+                icon: '🎨',
+                desc_en: 'Create stunning images with AI',
+                desc_ar: 'إنشاء صور مذهلة باستخدام الذكاء الاصطناعي',
+                tools: [
+                    { name_en: 'DALL-E 3', name_ar: 'دال-إي 3', desc_en: 'Advanced image generation from text', desc_ar: 'توليد صور متقدم من النصوص', link: 'https://openai.com/dall-e-3' },
+                    { name_en: 'Midjourney', name_ar: 'ميدجورني', desc_en: 'High-quality artistic image generation', desc_ar: 'توليد صور فنية عالية الجودة', link: 'https://midjourney.com' },
+                    { name_en: 'Stable Diffusion', name_ar: 'ستيبل ديفيوجن', desc_en: 'Open-source image synthesis model', desc_ar: 'نموذج تركيب الصور مفتوح المصدر', link: 'https://stablediffusionweb.com' },
+                    { name_en: 'Adobe Firefly', name_ar: 'أدوبي فايرفلاي', desc_en: 'Generative fill and image creation', desc_ar: 'التعبئة التوليدية وإنشاء الصور', link: 'https://firefly.adobe.com' },
+                    { name_en: 'Leonardo.AI', name_ar: 'ليوناردو أي', desc_en: 'AI image generation with fine control', desc_ar: 'توليد صور ذكاء اصطناعي مع التحكم الدقيق', link: 'https://leonardo.ai' },
+                    { name_en: 'Canva AI', name_ar: 'كانفا أي', desc_en: 'Design tool with built-in AI generation', desc_ar: 'أداة تصميم مع توليد الذكاء الاصطناعي المدمج', link: 'https://canva.com' },
+                    { name_en: 'Craiyon', name_ar: 'كريون', desc_en: 'Free AI image generator', desc_ar: 'مولد صور ذكاء اصطناعي مجاني', link: 'https://www.craiyon.com' },
+                    { name_en: 'Pixlr', name_ar: 'بكسلر', desc_en: 'Image editor with AI enhancement', desc_ar: 'محرر الصور مع تحسين الذكاء الاصطناعي', link: 'https://pixlr.com' },
+                    { name_en: 'Photoshop Generative Fill', name_ar: 'فوتوشوب', desc_en: 'Adobe Generative AI for image editing', desc_ar: 'ذكاء اصطناعي توليدي من Adobe لتحرير الصور', link: 'https://adobe.com' },
+                    { name_en: 'Remove.bg', name_ar: 'ريموف بي جي', desc_en: 'AI background removal tool', desc_ar: 'أداة إزالة خلفية الذكاء الاصطناعي', link: 'https://remove.bg' },
+                    { name_en: 'Upscayl', name_ar: 'أبسكايل', desc_en: 'Free image upscaling with AI', desc_ar: 'ترقية الصور المجانية مع الذكاء الاصطناعي', link: 'https://upscayl.github.io' },
+                    { name_en: 'BigJpg', name_ar: 'بيج جيبيجي', desc_en: 'Super-resolution image enlargement', desc_ar: 'تكبير الصور بدقة عالية', link: 'https://bigjpg.com' },
+                    { name_en: 'Clipart Studio', name_ar: 'كليب آرت', desc_en: 'AI-generated clip art and illustrations', desc_ar: 'صور توضيحية مولدة بالذكاء الاصطناعي', link: 'https://clipartstudio.com' },
+                    { name_en: 'Artbreeder', name_ar: 'آرت بريدر', desc_en: 'Collaborative creative AI platform', desc_ar: 'منصة إبداعية تعاونية بالذكاء الاصطناعي', link: 'https://www.artbreeder.com' },
+                    { name_en: 'Deep Dream', name_ar: 'ديب دريم', desc_en: 'Psychedelic image generation', desc_ar: 'توليد الصور النفسيدليكية', link: 'https://deepdreamgenerator.com' },
+                    { name_en: 'Anime AI', name_ar: 'أنمي أي', desc_en: 'AI anime character and art generation', desc_ar: 'توليد شخصيات الأنمي والفن بالذكاء الاصطناعي', link: 'https://animeai.art' },
+                    { name_en: 'Lensa', name_ar: 'لينسا', desc_en: 'AI photo enhancement and style transfer', desc_ar: 'تحسين الصور ونقل الأسلوب بالذكاء الاصطناعي', link: 'https://lensa.com' },
+                    { name_en: 'Fotor', name_ar: 'فوتور', desc_en: 'Photo editor with AI tools', desc_ar: 'محرر الصور مع أدوات الذكاء الاصطناعي', link: 'https://www.fotor.com' },
+                    { name_en: 'NightCafe Studio', name_ar: 'نايت كافيه', desc_en: 'Multi-model AI art generator', desc_ar: 'مولد فن ذكاء اصطناعي متعدد النماذج', link: 'https://www.nightcafe.studio' },
+                    { name_en: 'OpenDream', name_ar: 'أوبن دريم', desc_en: 'Online Stable Diffusion interface', desc_ar: 'واجهة Stable Diffusion عبر الإنترنت', link: 'https://opendream.ai' },
+                    { name_en: 'Imgupscaler', name_ar: 'إيمج أبسكيلر', desc_en: 'Upscale images with multiple AI models', desc_ar: 'ترقية الصور مع نماذج ذكاء اصطناعي متعددة', link: 'https://imgupscaler.com' },
+                    { name_en: 'Topaz Gigapixel', name_ar: 'توباز جيجابكسل', desc_en: 'Professional image enlargement software', desc_ar: 'برنامج تكبير الصور الاحترافي', link: 'https://www.topazlabs.com' },
+                    { name_en: 'inpainting.app', name_ar: 'إين بينتنج', desc_en: 'AI image inpainting and restoration', desc_ar: 'استعادة وإصلاح الصور بالذكاء الاصطناعي', link: 'https://inpainting.app' },
+                    { name_en: 'Dream by WOMBO', name_ar: 'درييم', desc_en: 'AI art creation with style control', desc_ar: 'إنشاء فن ذكاء اصطناعي مع التحكم بالأسلوب', link: 'https://www.wombo.art' },
+                    { name_en: 'Civitai', name_ar: 'سيفيتاي', desc_en: 'Community model sharing platform', desc_ar: 'منصة مشاركة نماذج المجتمع', link: 'https://civitai.com' },
+                    { name_en: 'Ideogram', name_ar: 'ايديوجرام', desc_en: 'AI image generation with text rendering', desc_ar: 'توليد صور ذكاء اصطناعي مع تقديم النصوص', link: 'https://ideogram.ai' },
+                    { name_en: 'Pix2Pix', name_ar: 'بكس 2 بكس', desc_en: 'Image-to-image translation AI', desc_ar: 'ذكاء اصطناعي لترجمة الصور', link: 'https://pix2pix.ai' },
+                    { name_en: 'StyleGAN', name_ar: 'ستايل جي أي إن', desc_en: 'Advanced generative image synthesis', desc_ar: 'تركيب الصور التوليدية المتقدم', link: 'https://stylegan.io' },
+                    { name_en: 'Perplexity Image Search', name_ar: 'بيرپلکسيتي', desc_en: 'AI-powered visual search', desc_ar: 'بحث بصري مدعوم بالذكاء الاصطناعي', link: 'https://www.perplexity.ai' },
+                    { name_en: 'Replicate', name_ar: 'ريپليكيت', desc_en: 'Run AI models in cloud', desc_ar: 'تشغيل نماذج الذكاء الاصطناعي في السحابة', link: 'https://replicate.com' },
+                    { name_en: 'Upscayl Pro', name_ar: 'أبسكايل برو', desc_en: 'Advanced image upscaling', desc_ar: 'ترقية الصور المتقدمة', link: 'https://upscaylpro.com' },
+                    { name_en: 'Photoleap', name_ar: 'فوتوليب', desc_en: 'Mobile AI photo editor', desc_ar: 'محرر الصور بالذكاء الاصطناعي للهاتف', link: 'https://photoleap.app' },
+                    { name_en: 'Remini', name_ar: 'ريميني', desc_en: 'Photo enhancement app', desc_ar: 'تطبيق تحسين الصور', link: 'https://remini.ai' },
+                    { name_en: 'AIEasyPhoto', name_ar: 'إيه آي إيزي فوتو', desc_en: 'Effortless AI photo editing', desc_ar: 'تحرير الصور بسهولة باستخدام الذكاء الاصطناعي', link: 'https://aieasy.photo' },
+                ]
+            },
+            audio: {
+                name_en: 'Audio',
+                name_ar: 'الصوت',
+                icon: '🎵',
+                desc_en: 'AI-powered audio generation and processing',
+                desc_ar: 'توليد ومعالجة الصوت بقوة الذكاء الاصطناعي',
+                tools: [
+                    { name_en: 'ElevenLabs', name_ar: 'إليفن لابز', desc_en: 'Natural-sounding AI text-to-speech', desc_ar: 'النصوص إلى كلام طبيعي بالذكاء الاصطناعي', link: 'https://elevenlabs.io' },
+                    { name_en: 'Descript', name_ar: 'ديسكريبت', desc_en: 'Audio transcription and editing', desc_ar: 'نسخ وتحرير الصوت', link: 'https://descript.com' },
+                    { name_en: 'Synthesia Voice', name_ar: 'سينثيسيا', desc_en: 'AI voice generation for video', desc_ar: 'توليد صوت ذكاء اصطناعي للفيديو', link: 'https://synthesia.io' },
+                    { name_en: 'Murf AI', name_ar: 'مورف أي', desc_en: 'AI voice generation and dubbing', desc_ar: 'توليد الصوت والمزامنة بالذكاء الاصطناعي', link: 'https://murf.ai' },
+                    { name_en: 'Google Play Books', name_ar: 'جوجل بلاي', desc_en: 'AI audiobook narration', desc_ar: 'سرد الكتب الصوتية بالذكاء الاصطناعي', link: 'https://play.google.com/books' },
+                    { name_en: 'JOVO', name_ar: 'جوفو', desc_en: 'Voice AI development framework', desc_ar: 'إطار عمل تطوير صوت الذكاء الاصطناعي', link: 'https://www.jovo.tech' },
+                    { name_en: 'Podcastle', name_ar: 'بودكاسل', desc_en: 'Podcast studio with AI editing', desc_ar: 'استوديو البودكاست مع تحرير الذكاء الاصطناعي', link: 'https://podcastle.ai' },
+                    { name_en: 'Adobe Podcast', name_ar: 'أدوبي بودكاست', desc_en: 'Enhanced audio for podcasters', desc_ar: 'صوت محسّن لمنتجي البودكاست', link: 'https://podcast.adobe.com' },
+                    { name_en: 'Soundraw', name_ar: 'ساوند رو', desc_en: 'AI music generation tool', desc_ar: 'أداة توليد الموسيقى بالذكاء الاصطناعي', link: 'https://soundraw.io' },
+                    { name_en: 'Amper Music', name_ar: 'أمبر موسيك', desc_en: 'Royalty-free AI music creation', desc_ar: 'إنشاء موسيقى بدون حقوق بالذكاء الاصطناعي', link: 'https://www.ampermusic.com' },
+                    { name_en: 'AIVA', name_ar: 'أايفا', desc_en: 'AI music composer for films', desc_ar: 'ملحن موسيقى ذكاء اصطناعي للأفلام', link: 'https://www.aiva.ai' },
+                    { name_en: 'Landr', name_ar: 'لاندر', desc_en: 'AI music mastering and distribution', desc_ar: 'إتقان الموسيقى بالذكاء الاصطناعي والتوزيع', link: 'https://www.landr.com' },
+                    { name_en: 'Wave.video Audio', name_ar: 'ويف أوديو', desc_en: 'Stock music and sound effects', desc_ar: 'موسيقى الخزان ومؤثرات صوتية', link: 'https://wave.video' },
+                    { name_en: 'Splice', name_ar: 'سبلايس', desc_en: 'AI sample discovery for music makers', desc_ar: 'اكتشاف العينات بالذكاء الاصطناعي لصانعي الموسيقى', link: 'https://splice.com' },
+                    { name_en: 'BeatBot', name_ar: 'بيت بوت', desc_en: 'AI beat generation platform', desc_ar: 'منصة توليد النبضات بالذكاء الاصطناعي', link: 'https://beatbot.ai' },
+                    { name_en: 'MasteringBOX', name_ar: 'ماسترينج بوكس', desc_en: 'AI audio mastering service', desc_ar: 'خدمة إتقان الصوت بالذكاء الاصطناعي', link: 'https://www.masteringbox.com' },
+                    { name_en: 'Google Cloud Speech', name_ar: 'جوجل كلاود', desc_en: 'Speech recognition and synthesis', desc_ar: 'التعرف على الكلام والتركيب', link: 'https://cloud.google.com/speech-to-text' },
+                    { name_en: 'Voiceflow', name_ar: 'ويس فلو', desc_en: 'Conversational voice design platform', desc_ar: 'منصة تصميم الصوت المحادثي', link: 'https://www.voiceflow.com' },
+                    { name_en: 'Resemble AI', name_ar: 'ريسيمبل', desc_en: 'Custom voice cloning for businesses', desc_ar: 'استنساخ صوت مخصص للشركات', link: 'https://www.resemble.ai' },
+                    { name_en: 'VoiceDesigner', name_ar: 'فويس ديزاينر', desc_en: 'Voice character creation tool', desc_ar: 'أداة إنشاء شخصية صوتية', link: 'https://voicedesigner.ai' },
+                    { name_en: 'Otter.ai', name_ar: 'أوتر', desc_en: 'Meeting transcription and notes', desc_ar: 'نسخ الاجتماعات والملاحظات', link: 'https://otter.ai' },
+                    { name_en: 'AudioShake', name_ar: 'أوديو شيك', desc_en: 'AI music source separation', desc_ar: 'فصل مصدر الموسيقى بالذكاء الاصطناعي', link: 'https://www.audioshake.ai' },
+                    { name_en: 'iSpeech', name_ar: 'آي سبيتش', desc_en: 'Speech recognition API', desc_ar: 'واجهة برمجية للتعرف على الكلام', link: 'https://www.ispeech.org' },
+                    { name_en: 'Listnr', name_ar: 'ليستنر', desc_en: 'AI text-to-speech for content', desc_ar: 'النصوص إلى كلام للمحتوى', link: 'https://www.listnr.tech' },
+                    { name_en: 'PlayHT', name_ar: 'بلاي إتش تي', desc_en: 'Realistic AI voice generator', desc_ar: 'مولد صوت واقعي بالذكاء الاصطناعي', link: 'https://www.playht.com' },
+                    { name_en: 'NotchMeister', name_ar: 'نوتش', desc_en: 'AI audio noise reduction', desc_ar: 'تقليل الضوضاء الصوتية بالذكاء الاصطناعي', link: 'https://notchmeister.com' },
+                    { name_en: 'Soundtrap', name_ar: 'ساوند تراپ', desc_en: 'Online music creation studio', desc_ar: 'استوديو إنشاء الموسيقى عبر الإنترنت', link: 'https://www.soundtrap.com' },
+                    { name_en: 'Tunedly', name_ar: 'تيونيدلي', desc_en: 'Remote music collaboration platform', desc_ar: 'منصة التعاون الموسيقي عن بعد', link: 'https://tunedly.com' },
+                    { name_en: 'Beatstars', name_ar: 'بيت ستارز', desc_en: 'Beat selling and licensing platform', desc_ar: 'منصة بيع النبضات والترخيص', link: 'https://www.beatstars.com' },
+                    { name_en: 'Soundcraft', name_ar: 'ساوند كرافت', desc_en: 'AI-assisted audio production', desc_ar: 'إنتاج الصوت بمساعدة الذكاء الاصطناعي', link: 'https://soundcraft.ai' },
+                    { name_en: 'Caveduck', name_ar: 'كيف ديك', desc_en: 'AI music mixing and mastering', desc_ar: 'مزج وإتقان الموسيقى بالذكاء الاصطناعي', link: 'https://caveduck.com' },
+                    { name_en: 'Vocalremover', name_ar: 'فوكال ريمover', desc_en: 'Vocal track separation', desc_ar: 'فصل المسارات الصوتية', link: 'https://vocalremover.org' },
+                    { name_en: 'Sonic Pi', name_ar: 'سونك باي', desc_en: 'AI music programming', desc_ar: 'برمجة الموسيقى بالذكاء الاصطناعي', link: 'https://sonic-pi.net' },
+                    { name_en: 'Melody Generator', name_ar: 'مولد الألحان', desc_en: 'AI melody creation', desc_ar: 'إنشاء الألحان بالذكاء الاصطناعي', link: 'https://melodygenerator.ai' },
+                ]
+            },
+            coding: {
+                name_en: 'Coding',
+                name_ar: 'البرمجة',
+                icon: '💻',
+                desc_en: 'AI-powered coding assistants and tools',
+                desc_ar: 'مساعدو البرمجة والأدوات بقوة الذكاء الاصطناعي',
+                tools: [
+                    { name_en: 'GitHub Copilot', name_ar: 'جيت هاب كوپايلوت', desc_en: 'AI pair programmer for code completion', desc_ar: 'مبرمج مساعد ذكاء اصطناعي لإكمال الأكواد', link: 'https://github.com/features/copilot' },
+                    { name_en: 'TabNine', name_ar: 'تاب ناين', desc_en: 'AI code completion with deep learning', desc_ar: 'إكمال الكود بالتعلم العميق', link: 'https://www.tabnine.com' },
+                    { name_en: 'Codeium', name_ar: 'كوديام', desc_en: 'Free AI-powered code completion', desc_ar: 'إكمال الكود المدعوم بالذكاء الاصطناعي المجاني', link: 'https://codeium.com' },
+                    { name_en: 'Amazon CodeWhisperer', name_ar: 'أمازون', desc_en: 'ML-powered code suggestions', desc_ar: 'اقتراحات الكود المدعومة بالتعلم الآلي', link: 'https://aws.amazon.com/codewhisperer' },
+                    { name_en: 'ChatGPT for Code', name_ar: 'تشات جي بي تي', desc_en: 'Code debugging and generation', desc_ar: 'تصحيح الأخطاء في الأكواد والتوليد', link: 'https://openai.com/chatgpt' },
+                    { name_en: 'Replit AI', name_ar: 'ريپليت', desc_en: 'AI coding in browser IDE', desc_ar: 'البرمجة بالذكاء الاصطناعي في متصفح', link: 'https://replit.com' },
+                    { name_en: 'DeepSeek Code', name_ar: 'ديپ سيك', desc_en: 'Advanced code analysis and generation', desc_ar: 'تحليل وتوليد الأكواد المتقدم', link: 'https://www.deepseek.com' },
+                    { name_en: 'Phind', name_ar: 'فايند', desc_en: 'AI search engine for developers', desc_ar: 'محرك بحث ذكاء اصطناعي للمطورين', link: 'https://www.phind.com' },
+                    { name_en: 'Stack Overflow AI', name_ar: 'ستاك أوفرفلو', desc_en: 'Code answers and solutions', desc_ar: 'إجابات وحلول الأكواد', link: 'https://stackoverflow.com' },
+                    { name_en: 'Sourcegraph Cody', name_ar: 'سورس جراف', desc_en: 'AI assistant for code understanding', desc_ar: 'مساعد ذكاء اصطناعي لفهم الأكواد', link: 'https://sourcegraph.com/cody' },
+                    { name_en: 'Hugging Face', name_ar: 'هاجينج فيس', desc_en: 'Open-source AI model hub', desc_ar: 'مركز نماذج الذكاء الاصطناعي مفتوحة المصدر', link: 'https://huggingface.co' },
+                    { name_en: 'JetBrains AI Assistant', name_ar: 'جيت برينز', desc_en: 'IDE-integrated AI coding assistant', desc_ar: 'مساعد كود ذكاء اصطناعي متكامل مع IDE', link: 'https://www.jetbrains.com' },
+                    { name_en: 'OpenAI Codex', name_ar: 'أوپن أيه آي', desc_en: 'Language model for code', desc_ar: 'نموذج لغة للأكواد', link: 'https://openai.com' },
+                    { name_en: 'Conventional Commits', name_ar: 'كونفنشنال', desc_en: 'AI commit message generator', desc_ar: 'مولد رسالة الالتزام بالذكاء الاصطناعي', link: 'https://www.conventionalcommits.org' },
+                    { name_en: 'Blackbox AI', name_ar: 'بلاك بوكس', desc_en: 'Code copying and search engine', desc_ar: 'محرك نسخ والبحث عن الأكواد', link: 'https://www.blackbox.ai' },
+                    { name_en: 'WhatTheCode', name_ar: 'وات ذا كود', desc_en: 'Code explanation AI tool', desc_ar: 'أداة شرح الأكواد بالذكاء الاصطناعي', link: 'https://whattthecode.com' },
+                    { name_en: 'AskCodi', name_ar: 'أسك كودي', desc_en: 'Ask for code snippets instantly', desc_ar: 'اطلب مقاطع الأكواد فوراً', link: 'https://www.askcodi.com' },
+                    { name_en: 'Bito', name_ar: 'بيتو', desc_en: 'AI code reviews and suggestions', desc_ar: 'مراجعة أكواد واقتراحات الذكاء الاصطناعي', link: 'https://bito.co' },
+                    { name_en: 'DevGPT', name_ar: 'ديف جي بي تي', desc_en: 'Developer assistant ChatGPT', desc_ar: 'مساعد المطور ChatGPT', link: 'https://www.devgpt.ai' },
+                    { name_en: 'Stenography', name_ar: 'ستينوجرافي', desc_en: 'Code documentation generator', desc_ar: 'مولد توثيق الأكواد', link: 'https://stenography.dev' },
+                    { name_en: 'Mintlify', name_ar: 'مينتليفي', desc_en: 'Beautiful documentation platform', desc_ar: 'منصة التوثيق الجميلة', link: 'https://mintlify.com' },
+                    { name_en: 'Refactoring.guru', name_ar: 'ريفاکتورنج', desc_en: 'Design patterns and refactoring', desc_ar: 'أنماط التصميم وإعادة البناء', link: 'https://refactoring.guru' },
+                    { name_en: 'DiffBlue', name_ar: 'ديف بلو', desc_en: 'Automated unit test generation', desc_ar: 'توليد اختبارات الوحدة تلقائياً', link: 'https://www.diffblue.com' },
+                    { name_en: 'SonarQube', name_ar: 'سونار كيوب', desc_en: 'Code quality and security analysis', desc_ar: 'تحليل جودة الأكواد والأمان', link: 'https://www.sonarqube.org' },
+                    { name_en: 'GitKraken', name_ar: 'جيت كراكن', desc_en: 'Git UI with AI features', desc_ar: 'واجهة Git مع ميزات الذكاء الاصطناعي', link: 'https://www.gitkraken.com' },
+                    { name_en: 'Codeball', name_ar: 'كود بال', desc_en: 'AI code review and approval', desc_ar: 'مراجعة الأكواد والموافقة بالذكاء الاصطناعي', link: 'https://codeball.ai' },
+                    { name_en: 'Metabase', name_ar: 'ميتابيس', desc_en: 'Data analytics query builder', desc_ar: 'أداة بناء استعلامات تحليل البيانات', link: 'https://www.metabase.com' },
+                    { name_en: 'Snyk', name_ar: 'سنايك', desc_en: 'Vulnerability scanning for developers', desc_ar: 'مسح الثغرات الأمنية للمطورين', link: 'https://snyk.io' },
+                    { name_en: 'LinearB', name_ar: 'لينيار بي', desc_en: 'Engineering metrics and insights', desc_ar: 'مقاييس الهندسة والرؤى', link: 'https://linearb.io' },
+                    { name_en: 'Copilot Pro', name_ar: 'كوپايلوت برو', desc_en: 'Advanced GitHub Copilot features', desc_ar: 'ميزات GitHub Copilot المتقدمة', link: 'https://github.com/features/copilot' },
+                    { name_en: 'CodeClimate', name_ar: 'كود كليمت', desc_en: 'Code quality metrics platform', desc_ar: 'منصة مقاييس جودة الأكواد', link: 'https://codeclimate.com' },
+                    { name_en: 'Kivy', name_ar: 'كيفي', desc_en: 'AI-powered UI framework', desc_ar: 'إطار عمل واجهة المستخدم بالذكاء الاصطناعي', link: 'https://kivy.org' },
+                    { name_en: 'Sourcery', name_ar: 'سورسري', desc_en: 'AI code refactoring tool', desc_ar: 'أداة إعادة هيكلة الأكواد بالذكاء الاصطناعي', link: 'https://sourcery.ai' },
+                    { name_en: 'Glean', name_ar: 'جلين', desc_en: 'AI-powered code insights', desc_ar: 'رؤى الأكواد المدعومة بالذكاء الاصطناعي', link: 'https://glean.com' },
+                ]
+            },
+            research: {
+                name_en: 'Research',
+                name_ar: 'البحث',
+                icon: '🔬',
+                desc_en: 'AI tools for academic and market research',
+                desc_ar: 'أدوات الذكاء الاصطناعي للبحث الأكاديمي والسوق',
+                tools: [
+                    { name_en: 'Perplexity AI', name_ar: 'بيرپلکسيتي', desc_en: 'AI-powered search engine', desc_ar: 'محرك بحث مدعوم بالذكاء الاصطناعي', link: 'https://www.perplexity.ai' },
+                    { name_en: 'Connected Papers', name_ar: 'كونكتد پيپرز', desc_en: 'Visual research paper network', desc_ar: 'شبكة الأوراق البحثية البصرية', link: 'https://www.connectedpapers.com' },
+                    { name_en: 'Semantic Scholar', name_ar: 'سيمانتك', desc_en: 'AI-powered academic search', desc_ar: 'بحث أكاديمي مدعوم بالذكاء الاصطناعي', link: 'https://www.semanticscholar.org' },
+                    { name_en: 'Elicit', name_ar: 'إليسيت', desc_en: 'AI research assistant for papers', desc_ar: 'مساعد بحث ذكاء اصطناعي للأوراق', link: 'https://elicit.org' },
+                    { name_en: 'ChatGPT', name_ar: 'تشات جي بي تي', desc_en: 'General knowledge research tool', desc_ar: 'أداة البحث عن المعرفة العامة', link: 'https://openai.com/chatgpt' },
+                    { name_en: 'Google Scholar', name_ar: 'جوجل سكولار', desc_en: 'Academic publication indexing', desc_ar: 'فهرسة المنشورات الأكاديمية', link: 'https://scholar.google.com' },
+                    { name_en: 'PubMed', name_ar: 'پوب ميد', desc_en: 'Biomedical literature search', desc_ar: 'البحث عن الأدب الطبي الحيوي', link: 'https://pubmed.ncbi.nlm.nih.gov' },
+                    { name_en: 'ScienceDirect', name_ar: 'سايينس دايركت', desc_en: 'Scientific journal and article platform', desc_ar: 'منصة المجلات والمقالات العلمية', link: 'https://www.sciencedirect.com' },
+                    { name_en: 'JSTOR', name_ar: 'جيستور', desc_en: 'Digital library of academic content', desc_ar: 'مكتبة رقمية للمحتوى الأكاديمي', link: 'https://www.jstor.org' },
+                    { name_en: 'ResearchRabbit', name_ar: 'ريسرچ رابت', desc_en: 'AI-powered research discovery', desc_ar: 'اكتشاف البحث بالذكاء الاصطناعي', link: 'https://www.researchrabbit.ai' },
+                    { name_en: 'Consensus', name_ar: 'كونسنسس', desc_en: 'Evidence-based research search', desc_ar: 'بحث البحث المبني على الأدلة', link: 'https://consensus.app' },
+                    { name_en: 'ChatPDF', name_ar: 'تشات پي دي إف', desc_en: 'Chat with PDF documents', desc_ar: 'الدردشة مع مستندات PDF', link: 'https://chatpdf.com' },
+                    { name_en: 'Scholarcy', name_ar: 'سكولاركي', desc_en: 'Research paper summarization', desc_ar: 'تلخيص الأوراق البحثية', link: 'https://www.scholarcy.com' },
+                    { name_en: 'AI Overviews (Google)', name_ar: 'جوجل', desc_en: 'AI-generated research summaries', desc_ar: 'ملخصات بحثية مولدة بالذكاء الاصطناعي', link: 'https://google.com' },
+                    { name_en: 'arXiv', name_ar: 'آر إكس آر إيڤ', desc_en: 'Preprint physics and CS papers', desc_ar: 'أوراق الفيزياء وعلوم الحاسوب السابقة', link: 'https://arxiv.org' },
+                    { name_en: 'ResearchGate', name_ar: 'ريسرچ جيت', desc_en: 'Researcher network and sharing', desc_ar: 'شبكة الباحثين والمشاركة', link: 'https://www.researchgate.net' },
+                    { name_en: 'Dimensions AI', name_ar: 'ديمنشنز', desc_en: 'Research evaluation and metrics', desc_ar: 'تقييم البحث والمقاييس', link: 'https://www.dimensions.ai' },
+                    { name_en: 'OpenDOAR', name_ar: 'أوپن دور', desc_en: 'Open access repository directory', desc_ar: 'دليل مستودع الوصول المفتوح', link: 'https://www.opendoar.org' },
+                    { name_en: 'BioRxiv', name_ar: 'بيو آر إكس آيڤ', desc_en: 'Biology preprint server', desc_ar: 'خادم الأوراق المسبقة للبيولوجيا', link: 'https://www.biorxiv.org' },
+                    { name_en: 'MedRxiv', name_ar: 'ميد آر إكس آيڤ', desc_en: 'Medical preprint server', desc_ar: 'خادم الأوراق المسبقة الطبية', link: 'https://www.medrxiv.org' },
+                    { name_en: 'OSF (Open Science)', name_ar: 'أو إس إف', desc_en: 'Open science collaboration platform', desc_ar: 'منصة التعاون العلمي المفتوحة', link: 'https://osf.io' },
+                    { name_en: 'Scopus', name_ar: 'سكوپس', desc_en: 'Citation tracking and analysis', desc_ar: 'تتبع الاستشهادات والتحليل', link: 'https://www.scopus.com' },
+                    { name_en: 'Web of Science', name_ar: 'ويب أوف سايينس', desc_en: 'Research evaluation and analytics', desc_ar: 'تقييم البحث والتحليلات', link: 'https://webofscience.com' },
+                    { name_en: 'Zotero', name_ar: 'زوتيرو', desc_en: 'Reference management tool', desc_ar: 'أداة إدارة المراجع', link: 'https://www.zotero.org' },
+                    { name_en: 'Mendeley', name_ar: 'مندلي', desc_en: 'Reference management for researchers', desc_ar: 'إدارة المراجع للباحثين', link: 'https://www.mendeley.com' },
+                    { name_en: 'Notion AI', name_ar: 'نوشن', desc_en: 'AI-enhanced research notes', desc_ar: 'ملاحظات البحث المحسنة بالذكاء الاصطناعي', link: 'https://www.notion.so' },
+                    { name_en: 'Ithenticate', name_ar: 'آيثنتيكيت', desc_en: 'Plagiarism detection tool', desc_ar: 'أداة الكشف عن الانتحال', link: 'https://www.ithenticate.com' },
+                    { name_en: 'Turnitin', name_ar: 'تيرنيتين', desc_en: 'Academic integrity checking', desc_ar: 'التحقق من النزاهة الأكاديمية', link: 'https://www.turnitin.com' },
+                    { name_en: 'Together AI', name_ar: 'تجيذر', desc_en: 'Research collaboration platform', desc_ar: 'منصة التعاون البحثي', link: 'https://www.together.ai' },
+                    { name_en: 'Knowledge Base', name_ar: 'نولج بيس', desc_en: 'AI-powered knowledge system', desc_ar: 'نظام المعرفة المدعوم بالذكاء الاصطناعي', link: 'https://knowledgebase.ai' },
+                    { name_en: 'ScienceOpen', name_ar: 'سايينس أوپن', desc_en: 'Open research platform', desc_ar: 'منصة البحث المفتوحة', link: 'https://www.scienceopen.com' },
+                    { name_en: 'SSRN', name_ar: 'إس إس آر إن', desc_en: 'Social science research network', desc_ar: 'شبكة بحوث العلوم الاجتماعية', link: 'https://ssrn.com' },
+                    { name_en: 'Unpaywall', name_ar: 'أنپيوول', desc_en: 'Open access research finder', desc_ar: 'محرك بحث البحث المفتوح الوصول', link: 'https://unpaywall.org' },
+                    { name_en: 'Core Aggregator', name_ar: 'كور', desc_en: 'AI research aggregation', desc_ar: 'تجميع البحث بالذكاء الاصطناعي', link: 'https://core.ac.uk' },
+                ]
+            },
+            productivity: {
+                name_en: 'Productivity',
+                name_ar: 'الإنتاجية',
+                icon: '⚡',
+                desc_en: 'Boost productivity with AI automation',
+                desc_ar: 'زيادة الإنتاجية مع أتمتة الذكاء الاصطناعي',
+                tools: [
+                    { name_en: 'Notion AI', name_ar: 'نوشن', desc_en: 'AI-powered workspace and writing', desc_ar: 'مساحة عمل وكتابة مدعومة بالذكاء الاصطناعي', link: 'https://www.notion.so' },
+                    { name_en: 'Microsoft Copilot', name_ar: 'مايکروسافت', desc_en: 'AI assistant integrated in Office', desc_ar: 'مساعد ذكاء اصطناعي متكامل في Office', link: 'https://copilot.microsoft.com' },
+                    { name_en: 'Google Gemini', name_ar: 'جوجل جيميني', desc_en: 'AI assistant for Google Workspace', desc_ar: 'مساعد ذكاء اصطناعي لـ Google Workspace', link: 'https://gemini.google.com' },
+                    { name_en: 'Slack AI', name_ar: 'سلاك', desc_en: 'Intelligent team communication', desc_ar: 'اتصالات الفريق الذكية', link: 'https://slack.com' },
+                    { name_en: 'Calendar AI', name_ar: 'كالندر', desc_en: 'Smart meeting scheduling', desc_ar: 'جدولة الاجتماعات الذكية', link: 'https://calendar.ai' },
+                    { name_en: 'Fireflies', name_ar: 'فايرفلايز', desc_en: 'Meeting transcription and summary', desc_ar: 'نسخ وتلخيص الاجتماعات', link: 'https://fireflies.ai' },
+                    { name_en: 'Otter.ai', name_ar: 'أوتر', desc_en: 'Meeting notes and transcription', desc_ar: 'ملاحظات الاجتماعات والنسخ', link: 'https://otter.ai' },
+                    { name_en: 'Motion', name_ar: 'موشن', desc_en: 'AI project and time management', desc_ar: 'إدارة المشاريع والوقت بالذكاء الاصطناعي', link: 'https://www.motion.app' },
+                    { name_en: 'Reclaim AI', name_ar: 'ريكليم', desc_en: 'Time management automation', desc_ar: 'أتمتة إدارة الوقت', link: 'https://reclaim.ai' },
+                    { name_en: 'Clockwise', name_ar: 'كلوك وايز', desc_en: 'Calendar optimization AI', desc_ar: 'ذكاء اصطناعي لتحسين الجدول الزمني', link: 'https://www.clockwise.team' },
+                    { name_en: 'Asana AI', name_ar: 'أسانا', desc_en: 'Project management with AI', desc_ar: 'إدارة المشاريع مع الذكاء الاصطناعي', link: 'https://asana.com' },
+                    { name_en: 'Monday.com AI', name_ar: 'مندي', desc_en: 'Work OS with built-in AI', desc_ar: 'نظام تشغيل العمل مع الذكاء الاصطناعي المدمج', link: 'https://monday.com' },
+                    { name_en: 'Zapier AI', name_ar: 'زابيير', desc_en: 'Workflow automation with AI', desc_ar: 'أتمتة سير العمل مع الذكاء الاصطناعي', link: 'https://zapier.com' },
+                    { name_en: 'Make', name_ar: 'ميك', desc_en: 'Automated workflow platform', desc_ar: 'منصة سير العمل الآلي', link: 'https://www.make.com' },
+                    { name_en: 'IFTTT', name_ar: 'إيفت ذيس', desc_en: 'If This Then That automation', desc_ar: 'أتمتة إذا ثم ذلك', link: 'https://ifttt.com' },
+                    { name_en: 'Pabbly Connect', name_ar: 'پابلي', desc_en: 'Workflow automation tool', desc_ar: 'أداة أتمتة سير العمل', link: 'https://www.pabbly.com' },
+                    { name_en: 'n8n', name_ar: 'إن 8 إن', desc_en: 'Open-source workflow automation', desc_ar: 'أتمتة سير العمل مفتوحة المصدر', link: 'https://n8n.io' },
+                    { name_en: 'Integromat', name_ar: 'إنتجروميت', desc_en: 'Visual workflow builder', desc_ar: 'مُنشئ سير العمل البصري', link: 'https://www.integromat.com' },
+                    { name_en: 'Focus@Will', name_ar: 'فوكس ويل', desc_en: 'Productivity music with AI', desc_ar: 'موسيقى الإنتاجية مع الذكاء الاصطناعي', link: 'https://www.focusatwill.com' },
+                    { name_en: 'Brain.fm', name_ar: 'برين', desc_en: 'Scientifically optimized focus music', desc_ar: 'موسيقى التركيز المحسّنة علمياً', link: 'https://www.brain.fm' },
+                    { name_en: 'Noisli', name_ar: 'نويزلي', desc_en: 'Ambient sounds for concentration', desc_ar: 'أصوات محيطة للتركيز', link: 'https://www.noisli.com' },
+                    { name_en: 'Forest', name_ar: 'فوريست', desc_en: 'Focus and productivity timer app', desc_ar: 'تطبيق مؤقت التركيز والإنتاجية', link: 'https://www.forestapp.cc' },
+                    { name_en: 'RescueTime', name_ar: 'ريسكيو تايم', desc_en: 'Automatic time tracking and analytics', desc_ar: 'تتبع الوقت والتحليلات التلقائية', link: 'https://www.rescuetime.com' },
+                    { name_en: 'Toggl Track', name_ar: 'توجل', desc_en: 'Time tracking and productivity tool', desc_ar: 'أداة تتبع الوقت والإنتاجية', link: 'https://toggl.com' },
+                    { name_en: 'Clockify', name_ar: 'كلوكيفاي', desc_en: 'Free time tracking software', desc_ar: 'برنامج تتبع الوقت المجاني', link: 'https://clockify.me' },
+                    { name_en: 'Superhuman', name_ar: 'سوپرهيومان', desc_en: 'AI email management', desc_ar: 'إدارة البريد الإلكتروني بالذكاء الاصطناعي', link: 'https://superhuman.com' },
+                    { name_en: 'Mailstrom', name_ar: 'ميلستروم', desc_en: 'Bulk email organization', desc_ar: 'تنظيم البريد الإلكتروني بالجملة', link: 'https://mailstrom.co' },
+                    { name_en: 'Boomerang', name_ar: 'بوميرانج', desc_en: 'Email productivity features', desc_ar: 'ميزات إنتاجية البريد الإلكتروني', link: 'https://www.boomeranggmail.com' },
+                    { name_en: 'Todoist AI', name_ar: 'تودويست', desc_en: 'Smart task management', desc_ar: 'إدارة المهام الذكية', link: 'https://todoist.com' },
+                    { name_en: 'Any.do', name_ar: 'اني دو', desc_en: 'Task and habit tracking', desc_ar: 'تتبع المهام والعادات', link: 'https://www.any.do' },
+                    { name_en: 'Rize', name_ar: 'رايز', desc_en: 'AI-powered productivity tracking', desc_ar: 'تتبع الإنتاجية بالذكاء الاصطناعي', link: 'https://rize.io' },
+                    { name_en: 'HubSpot AI', name_ar: 'هاب سبوت', desc_en: 'AI for CRM and sales', desc_ar: 'ذكاء اصطناعي لـ CRM والمبيعات', link: 'https://www.hubspot.com' },
+                    { name_en: 'ClickUp AI', name_ar: 'كليك اپ', desc_en: 'All-in-one workspace with AI', desc_ar: 'مساحة عمل شاملة مع الذكاء الاصطناعي', link: 'https://clickup.com' },
+                    { name_en: 'Wunderbucket', name_ar: 'وندربوكت', desc_en: 'Meeting preparation AI', desc_ar: 'ذكاء اصطناعي لتحضير الاجتماعات', link: 'https://wunderbucket.com' },
+                    { name_en: 'Krisp', name_ar: 'كريسپ', desc_en: 'AI noise cancellation', desc_ar: 'إلغاء الضوضاء بالذكاء الاصطناعي', link: 'https://krisp.ai' },
+                ]
+            }
+        };
+
+        const translations = {
+            en: {
+                hero_title: 'Discover Premium AI Tools',
+                hero_desc: 'Access cutting-edge artificial intelligence solutions for every need',
+                back_btn: '← Back to Categories',
+                theme_toggle: '🌙 Dark',
+                theme_toggle_light: '☀️ Light'
+            },
+            ar: {
+                hero_title: 'اكتشف أدوات الذكاء الاصطناعي المتميزة',
+                hero_desc: 'احصل على حلول الذكاء الاصطناعي الحديثة لكل احتياج',
+                back_btn: '← العودة إلى الفئات',
+                theme_toggle: '🌙 داكن',
+                theme_toggle_light: '☀️ فاتح'
+            }
+        };
+
+        let currentLang = 'en';
+        let isDarkMode = true;
+
+        function updateUI() {
+            const lang = currentLang;
+            document.getElementById('hero-title').textContent = translations[lang].hero_title;
+            document.getElementById('hero-desc').textContent = translations[lang].hero_desc;
+            document.getElementById('back-btn').textContent = translations[lang].back_btn;
+            document.getElementById('theme-toggle').textContent = isDarkMode ? translations[lang].theme_toggle : translations[lang].theme_toggle_light;
+
+            renderCategories();
+        }
+
+        function renderCategories() {
+            const grid = document.getElementById('categories-grid');
+            grid.innerHTML = '';
+            Object.entries(categories).forEach(([key, cat]) => {
+                const card = document.createElement('div');
+                card.className = 'category-card';
+                card.innerHTML = `
+                    <div class="category-icon">${cat.icon}</div>
+                    <h3>${currentLang === 'en' ? cat.name_en : cat.name_ar}</h3>
+                    <p>${currentLang === 'en' ? cat.desc_en : cat.desc_ar}</p>
+                `;
+                card.onclick = () => showTools(key);
+                grid.appendChild(card);
+            });
+        }
+
+        function showTools(categoryKey) {
+            const cat = categories[categoryKey];
+            document.getElementById('categories-view').style.display = 'none';
+            document.getElementById('tools-view').classList.add('active');
+            document.getElementById('tools-title').textContent = currentLang === 'en' ? cat.name_en : cat.name_ar;
+
+            const toolsGrid = document.getElementById('tools-grid');
+            toolsGrid.innerHTML = '';
+            cat.tools.forEach(tool => {
+                const card = document.createElement('a');
+                card.href = tool.link;
+                card.target = '_blank';
+                card.className = 'tool-card';
+                card.innerHTML = `
+                    <div class="tool-name">${currentLang === 'en' ? tool.name_en : tool.name_ar}</div>
+                    <div class="tool-desc">${currentLang === 'en' ? tool.desc_en : tool.desc_ar}</div>
+                    <div class="tool-cta">→ Explore</div>
+                `;
+                toolsGrid.appendChild(card);
+            });
+        }
+
+        function backToCategories() {
+            document.getElementById('categories-view').style.display = 'block';
+            document.getElementById('tools-view').classList.remove('active');
+        }
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('light-mode');
+            updateUI();
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            document.documentElement.lang = currentLang;
+            document.getElementById('lang-toggle').textContent = currentLang === 'en' ? 'EN' : 'AR';
+            updateUI();
+        }
+
+        updateUI();
+    </script>
+</body>
+</html>
